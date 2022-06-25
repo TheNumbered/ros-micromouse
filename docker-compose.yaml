@@ -1,0 +1,31 @@
+version: '1.0'
+
+services:
+    develop:
+        image: deli/micromouse
+        command: /bin/bash
+
+        stdin_open: true
+        tty: true
+
+        environment:
+            - "DISPLAY"
+            - "QT_X11_NO_MITSHM=1"
+        volumes:
+            - /home/deli/Documents/husarion/ros-micromouse:/root
+
+        network_mode: host
+
+    build:
+        image: deli/micromouse
+        command: bash -c "cd /root && colcon build"
+        volumes:
+            - /home/deli/Documents/husarion/ros-micromouse:/root
+
+    bringup_micromouse:
+        image: deli/micromouse
+        depends_on:
+            - build
+        command: bash -c "source /root/install/setup.bash && ros2 lauch micromouse_bringup micromouse_bringup.launch.py"
+        volumes:
+            - /home/deli/Documents/husarion/ros-micromouse:/root
