@@ -24,8 +24,22 @@ services:
 
     bringup_micromouse:
         image: deli/micromouse
+        network_mode: host
         depends_on:
             - build
-        command: bash -c "source /root/install/setup.bash && ros2 lauch micromouse_bringup micromouse_bringup.launch.py"
+        command: bash -c "source /root/install/setup.bash && ros2 launch micromouse_bringup micromouse_bringup.launch.py"
         volumes:
             - /home/deli/Documents/husarion/ros-micromouse:/root
+
+    rviz:
+        image: deli/micromouse
+        command: bash -c "source /root/install/setup.bash && rviz2 -d /root/src/micromouse_description/rviz/micromouse_rviz.rviz"
+        volumes:
+            - /home/deli/Documents/husarion/ros-micromouse:/root
+        network_mode: host
+        environment:
+            - "DISPLAY"
+            - "QT_X11_NO_MITSHM=1"
+            # - "NVIDIA_VISIBLE_DEVICES=-all"
+            # - "NVIDIA_DRIVER_CAPABILITIES=+$NVIDIA_DRIVER_CAPABILITIES"
+
