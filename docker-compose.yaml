@@ -19,7 +19,7 @@ services:
 
     build:
         image: deli/micromouse
-        command: bash -c "cd /root && colcon build"
+        command: bash -c "cd /root && colcon build "
         volumes:
             - /home/deli/Documents/husarion/ros-micromouse:/root
 

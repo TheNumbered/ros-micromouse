@@ -3,3 +3,6 @@ build:
 
 chown:
 	sudo chown -R deli:deli .
+
+clean:
+	sudo rm -rf log install build
