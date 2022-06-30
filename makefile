@@ -5,4 +5,4 @@ chown:
 	sudo chown -R deli:deli .
 
 clean:
-	sudo rm -rf log install build
+	sudo rm -rf ws/log ws/install ws/build
