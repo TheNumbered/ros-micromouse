@@ -23,7 +23,7 @@ services:
         volumes:
             - /home/deli/Documents/husarion/ros-micromouse/ws:/root/ws
 
-    bringup_micromouse:
+    micromouse_bringup:
         image: deli/micromouse
         network_mode: host
         environment:
@@ -36,13 +36,13 @@ services:
         volumes:
             - /tmp/.X11-unix:/tmp/.X11-unix
             - /dev/dri:/dev/dri
-            - /home/deli/Documents/husarion/ros-micromouse/ws:/root/
+            - /home/deli/Documents/husarion/ros-micromouse/ws:/root/ws
 
     rviz:
         image: deli/micromouse
         command: bash -c "source /root/ws/install/setup.bash && rviz2 -d /root/ws/src/micromouse_description/rviz/micromouse_rviz.rviz"
         volumes:
-            - /home/deli/Documents/husarion/ros-micromouse/ws:/root/
+            - /home/deli/Documents/husarion/ros-micromouse/ws:/root/ws
             - /tmp/.X11-unix:/tmp/.X11-unix
             - /dev/dri:/dev/dri
         network_mode: host

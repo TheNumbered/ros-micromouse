@@ -113,21 +113,16 @@
 
     <!-- Range Sensors -->
     <xacro:include filename="$(find micromouse_description)/urdf/range_sensor.xacro" />
-    <xacro:range_sensor name="range_sesnor_right" parent="base_link">
+    <xacro:range_sensor name="range_sensor_right" parent="base_link">
         <origin xyz="0.05 0.05 ${base_height/2 + 0.005}" rpy="0 0 -${3.14/6}" />
     </xacro:range_sensor>
-
-
-
 
     <xacro:range_sensor name="range_sensor_left" parent="base_link">
         <origin xyz="0.05 -0.05 ${base_height/2 + 0.005}" rpy="0 0 ${3.14/6}" />
     </xacro:range_sensor>
 
-
-<!-- 
     <xacro:range_sensor name="range_sensor_front" parent="base_link">
         <origin xyz="0.05 0.0 ${base_height/2 + 0.005}" rpy="0 0 0" />
-    </xacro:range_sensor> -->
+    </xacro:range_sensor>
 
 </robot>
