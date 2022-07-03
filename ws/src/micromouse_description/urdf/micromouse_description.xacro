@@ -124,5 +124,4 @@
     <xacro:range_sensor name="range_sensor_front" parent="base_link">
         <origin xyz="0.05 0.0 ${base_height/2 + 0.005}" rpy="0 0 0" />
     </xacro:range_sensor>
-
 </robot>
