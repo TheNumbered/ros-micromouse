@@ -19,7 +19,7 @@ services:
 
     build:
         image: deli/micromouse
-        command: bash -c "cd /root/ws && colcon build "
+        command: bash -c "cd /root/ws && colcon build  --executor parallel"
         volumes:
             - /home/deli/Documents/husarion/ros-micromouse/ws:/root/ws
 
@@ -32,7 +32,7 @@ services:
         depends_on:
             build:
                   condition: service_started
-        command: bash -c "source /root/ws/install/setup.bash && ros2 launch micromouse_bringup micromouse_bringup.launch.py"
+        command: bash -c "cd /root/ws && colcon build --symlink-install  --executor parallel && source /root/ws/install/setup.bash && ros2 launch micromouse_bringup micromouse_bringup.launch.py"
         volumes:
             - /tmp/.X11-unix:/tmp/.X11-unix
             - /dev/dri:/dev/dri
