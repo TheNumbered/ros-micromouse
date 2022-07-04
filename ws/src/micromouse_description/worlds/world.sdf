@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+    <world name="default">
+        <include>
+            <uri>model://ground_plane</uri>
+        </include>
+        <include>
+            <uri>model://sun</uri>
+        </include>
+        <model name="my_mesh">
+            <pose>0 0 0  0 0 -1.57</pose>
+            <static>true</static>
+            <link name="body">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <scale>0.001 0.001 0.001</scale>
+                            <uri>model://maze.stl</uri>
+                        </mesh>
+                    </geometry>
+                </visual>
+
+                <collision name="collision">
+                    <geometry>
+                        <mesh>
+                            <scale>0.001 0.001 0.001</scale>
+                            <uri>model://maze.stl</uri>
+                        </mesh>
+                    </geometry>
+                </collision>
+            </link>
+
+            <gazebo reference="body">
+                <material>Gazebo/White</material>
+            </gazebo>
+        </model>
+    </world>
+</sdf>

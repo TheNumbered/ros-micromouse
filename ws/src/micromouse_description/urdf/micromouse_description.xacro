@@ -2,15 +2,15 @@
 <robot name="sam_bot" xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:include filename="$(find micromouse_description)/urdf/macros.xacro" />
     <!-- Define robot constants -->
-    <xacro:property name="base_width" value="0.09" />
-    <xacro:property name="base_length" value="0.1" />
+    <xacro:property name="base_width" value="0.04" />
+    <xacro:property name="base_length" value="0.06" />
     <xacro:property name="base_height" value="0.025" />
 
     <xacro:property name="wheel_radius" value="0.02" />
     <xacro:property name="wheel_width" value="0.01" />
     <xacro:property name="wheel_ygap" value="${base_width/2 + wheel_width/2}" />
     <xacro:property name="wheel_zoff" value="0.005" />
-    <xacro:property name="wheel_xoff" value="0.02" />
+    <xacro:property name="wheel_xoff" value="0.015" />
 
     <xacro:property name="caster_xoff" value="0.04" />
 
@@ -121,14 +121,14 @@
     <!-- Range Sensors -->
     <xacro:include filename="$(find micromouse_description)/urdf/range_sensor.xacro" />
     <xacro:range_sensor name="range_sensor_right" parent="base_link">
-        <origin xyz="0.05 0.05 ${base_height/2 + 0.005}" rpy="0 0 -${3.14/6}" />
+        <origin xyz="0.025 0.025 ${base_height/2 + 0.005}" rpy="0 0 -${3.14/6}" />
     </xacro:range_sensor>
 
     <xacro:range_sensor name="range_sensor_left" parent="base_link">
-        <origin xyz="0.05 -0.05 ${base_height/2 + 0.005}" rpy="0 0 ${3.14/6}" />
+        <origin xyz="0.025 -0.025 ${base_height/2 + 0.005}" rpy="0 0 ${3.14/6}" />
     </xacro:range_sensor>
 
     <xacro:range_sensor name="range_sensor_front" parent="base_link">
-        <origin xyz="0.05 0.0 ${base_height/2 + 0.005}" rpy="0 0 0" />
+        <origin xyz="0.025 0.0 ${base_height/2 + 0.005}" rpy="0 0 0" />
     </xacro:range_sensor>
 </robot>

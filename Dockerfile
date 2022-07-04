@@ -9,6 +9,7 @@ RUN apt update && \
         ros-$ROS_DISTRO-xacro \
         ros-$ROS_DISTRO-joint-state-publisher \
         ros-$ROS_DISTRO-gazebo-ros-pkgs \
+        ros-$ROS_DISTRO-rqt-robot-steering \
         ros-$ROS_DISTRO-rmw-fastrtps-cpp \
         # ros-$ROS_DISTRO-navigation2 \
         # ros-$ROS_DISTRO-nav2-bringup && \

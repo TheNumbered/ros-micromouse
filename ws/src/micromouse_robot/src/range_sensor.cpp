@@ -18,11 +18,7 @@ double RangeSensor::get_range() {
         if (ret_take) {
             RCLCPP_DEBUG(this->get_logger(), "got message: %f", msg.range);
             range_ = msg.range;
-        } else {
-            RCLCPP_ERROR(this->get_logger(), "no message received");
         }
-    } else {
-        RCLCPP_ERROR(this->get_logger(), "couldn't wait for message");
     }
     wait_set.remove_subscription(range_sub_);
     return range_;

@@ -5,7 +5,7 @@
             <visual>
                 <origin rpy="0 0 0" xyz="0 0 0" />
                 <geometry>
-                    <cylinder length="0.01" radius="0.01" />
+                    <cylinder length="0.005" radius="0.005" />
                 </geometry>
                 <material name="Black">
                     <color rgba="0.0 0.0 0.0 1.0" />

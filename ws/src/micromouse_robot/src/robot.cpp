@@ -11,9 +11,8 @@ Robot::Robot()
 }
 
 void Robot::update_() {
-    RCLCPP_INFO(get_logger(), "left: %f", range_left->get_range());
-    RCLCPP_INFO(get_logger(), "front: %f", range_front->get_range());
-    RCLCPP_INFO(get_logger(), "right: %f", range_right->get_range());
-
+    // RCLCPP_INFO(get_logger(), "left: %f", range_left->get_range());
+    // RCLCPP_INFO(get_logger(), "front: %f", range_front->get_range());
+    // RCLCPP_INFO(get_logger(), "right: %f", range_right->get_range());
 }
 }  // namespace micromouse
