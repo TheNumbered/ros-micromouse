@@ -33,6 +33,9 @@
 
         <xacro:box_inertia m="15" w="${base_width}" d="${base_length}" h="${base_height}" />
     </link>
+    <gazebo reference="base_link">
+        <material>Gazebo/Turquoise</material>
+    </gazebo>
 
     <!-- Robot Footprint -->
     <link name="base_footprint">
@@ -105,6 +108,10 @@
         <child link="front_caster" />
         <origin xyz="${caster_xoff} 0.0 ${-(base_height/2)}" rpy="0 0 0" />
     </joint>
+    <gazebo reference="front_caster">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
 
     <xacro:include filename="$(find micromouse_description)/urdf/imu.xacro" />
     <xacro:include filename="$(find micromouse_description)/urdf/diff_drive.xacro" />

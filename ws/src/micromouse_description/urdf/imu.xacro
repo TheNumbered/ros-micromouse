@@ -21,6 +21,7 @@
     <origin xyz="0 0 0.01" />
 </joint>
 <gazebo reference="imu_link">
+    <material>Gazebo/Black</material>
     <sensor name="imu_sensor" type="imu">
         <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
             <ros>
