@@ -2,7 +2,9 @@
 
 namespace micromouse {
 Motors::Motors()
-    : rclcpp::Node("micromouse_motors"), vel_lin_{std::numeric_limits<double>::quiet_NaN()}, vel_ang_{std::numeric_limits<double>::quiet_NaN()} {
+    : rclcpp::Node("micromouse_motors"),
+      vel_lin_{std::numeric_limits<double>::quiet_NaN()},
+      vel_ang_{std::numeric_limits<double>::quiet_NaN()}{
     cmd_vel_pub_ = create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
     // odom_sub_ = create_subscription<nav_msgs::msg::Odometry>("odom", 10, std::bind(&Motors::odom_callback_, this, _1));
 }

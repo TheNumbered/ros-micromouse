@@ -28,6 +28,7 @@ add_executable(micromouse_robot
   src/range_sensor.cpp
   src/micromouse_robot.cpp
   src/motors.cpp
+  src/pid_controller.cpp
   src/robot.cpp
   )
 
