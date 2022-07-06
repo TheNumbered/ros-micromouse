@@ -27,10 +27,11 @@ endif()
 add_executable(micromouse_robot
   src/rclcpp_range_sensor.cpp
   src/rclcpp_motors.cpp
-  # src/imu.cpp
-  src/micromouse_robot.cpp
+  src/rclcpp_imu.cpp
   src/pid_controller.cpp
   src/robot.cpp
+
+  src/micromouse_robot.cpp
   )
 
 target_include_directories(
@@ -39,10 +40,14 @@ target_include_directories(
   include
 )
 
-
 ament_target_dependencies(micromouse_robot rclcpp sensor_msgs nav_msgs tf2)
 
 install(TARGETS
   micromouse_robot
   DESTINATION lib/${PROJECT_NAME})
+
+install(DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
+)
+
 ament_package()

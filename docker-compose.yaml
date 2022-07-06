@@ -16,24 +16,29 @@ services:
 
         network_mode: host
 
-
-    micromouse_steering:
-        image: deli/micromouse
-        command: bash -c "source /root/ws/install/setup.bash && ros2 run rqt_robot_steering rqt_robot_steering"
-        network_mode: host
-        environment:
-            - "DISPLAY"
-            - "QT_X11_NO_MITSHM=1"
-        volumes:
-            - /home/deli/Documents/husarion/ros-micromouse/ws:/root/ws
-
     micromouse_bringup:
         image: deli/micromouse
+        privileged: true
         network_mode: host
+        ipc: host
         environment:
             - "DISPLAY"
             - "QT_X11_NO_MITSHM=1"
         command: bash -c "cd /root/ws && colcon build --executor parallel && source /root/ws/install/setup.bash && ros2 launch micromouse_bringup micromouse_bringup.launch.py"
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+            - /dev/dri:/dev/dri
+            - /home/deli/Documents/husarion/ros-micromouse/ws:/root/ws
+
+    micromouse_controller:
+        image: deli/micromouse
+        privileged: true
+        ipc: host
+        network_mode: host
+        environment:
+            - "DISPLAY"
+            - "QT_X11_NO_MITSHM=1"
+        command: bash -c "cd /root/ws && colcon build --executor parallel && source /root/ws/install/setup.bash && ros2 launch micromouse_robot micromouse_robot.launch.py"
         volumes:
             - /tmp/.X11-unix:/tmp/.X11-unix
             - /dev/dri:/dev/dri
@@ -51,6 +56,4 @@ services:
             - "DISPLAY"
             - "QT_X11_NO_MITSHM=1"
 
-            # - "NVIDIA_VISIBLE_DEVICES=-all"
-            # - "NVIDIA_DRIVER_CAPABILITIES=+$NVIDIA_DRIVER_CAPABILITIES"
 

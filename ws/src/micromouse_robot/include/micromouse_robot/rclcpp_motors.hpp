@@ -17,6 +17,8 @@ class RclcppMotors : public MotorsInterface, public rclcpp::Node {
    public:
     RclcppMotors();
     virtual void set_velocity(float linear_velocity_m_per_s, float angular_velocity_rad_per_s) override final;
+    virtual float get_linear_velocity() override final;
+    virtual float get_angular_velocity() override final;
     virtual float get_angle() override final;
     virtual Position2D get_position() override final;
 

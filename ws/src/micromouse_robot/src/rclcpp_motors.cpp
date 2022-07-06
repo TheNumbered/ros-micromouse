@@ -15,6 +15,38 @@ void RclcppMotors::set_velocity(float linear_velocity_m_per_s, float angular_vel
     cmd_vel_pub_->publish(message);
 }
 
+float RclcppMotors::get_linear_velocity(){
+    rclcpp::WaitSet wait_set;
+    wait_set.add_subscription(odom_sub_);
+    auto ret = wait_set.wait(std::chrono::microseconds(100));
+    if (ret.kind() == rclcpp::WaitResultKind::Ready) {
+        nav_msgs::msg::Odometry msg;
+        rclcpp::MessageInfo info;
+        auto ret_take = odom_sub_->take(msg, info);
+        if (ret_take) {
+            linear_velocity_m_per_s_ = static_cast<float>(msg.twist.twist.linear.x);
+        }
+    }
+    wait_set.remove_subscription(odom_sub_);
+    return linear_velocity_m_per_s_;
+}
+
+float RclcppMotors::get_angular_velocity() {
+    rclcpp::WaitSet wait_set;
+    wait_set.add_subscription(odom_sub_);
+    auto ret = wait_set.wait(std::chrono::microseconds(100));
+    if (ret.kind() == rclcpp::WaitResultKind::Ready) {
+        nav_msgs::msg::Odometry msg;
+        rclcpp::MessageInfo info;
+        auto ret_take = odom_sub_->take(msg, info);
+        if (ret_take) {
+            angular_velocity_rad_per_s_ = static_cast<float>(msg.twist.twist.angular.z);
+        }
+    }
+    wait_set.remove_subscription(odom_sub_);
+    return angular_velocity_rad_per_s_;
+}
+
 float RclcppMotors::get_angle() {
     rclcpp::WaitSet wait_set;
     wait_set.add_subscription(odom_sub_);

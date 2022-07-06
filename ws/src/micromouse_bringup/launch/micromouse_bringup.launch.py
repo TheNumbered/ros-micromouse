@@ -51,22 +51,14 @@ def generate_launch_description():
         output='screen'
     )
 
-    micromouse_robot_node = launch_ros.actions.Node(
-        package='micromouse_robot',
-        executable='micromouse_robot',
-        namespace='micromouse',
-        output='screen'
-    )
-
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='model', default_value=default_model_path,
                                              description='Absolute path to robot urdf file'),
 
         launch.actions.ExecuteProcess(
-            cmd=['gazebo', '--verbose',  world_path, '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so'], output='screen'),
+            cmd=['gazebo',  world_path, '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so'], output='screen'),
 
         joint_state_publisher_node,
         robot_state_publisher_node,
         spawn_entity,
-        micromouse_robot_node,
     ])

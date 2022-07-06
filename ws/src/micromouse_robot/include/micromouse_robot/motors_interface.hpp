@@ -15,6 +15,8 @@ class MotorsInterface {
     }
 
     virtual void set_velocity(float linear_velocity_m_per_s, float angular_velocity_rad_per_s) = 0;
+    virtual float get_linear_velocity() = 0;
+    virtual float get_angular_velocity() = 0;
     virtual float get_angle() = 0;
     virtual Position2D get_position() = 0;
 

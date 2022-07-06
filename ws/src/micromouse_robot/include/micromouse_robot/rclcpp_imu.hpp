@@ -7,17 +7,16 @@
 #include <sensor_msgs/msg/imu.hpp>
 #include <string>
 #include <thread>
+#include "imu_interface.hpp"
 
 namespace micromouse {
-class Imu : public rclcpp::Node {
+class RclcppImu : public ImuInterface, public rclcpp::Node {
    public:
-    Imu();
-    double get_angle();
+    RclcppImu();
+    virtual float get_angle() override final;
 
    private:
-    double angle_;
     rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr imu_sub_;
-
     void imu_callback_(const sensor_msgs::msg::Imu &msg);
 };
 }  // namespace micromouse
