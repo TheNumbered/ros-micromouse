@@ -2,7 +2,7 @@
 #include <rclcpp/rclcpp.hpp>
 
 // #include "imu.hpp"
-#include "motors.hpp"
+#include "rclcpp_motors.hpp"
 #include "pid_controller.hpp"
 #include "rclcpp_range_sensor.hpp"
 
@@ -18,7 +18,7 @@ class Robot: public rclcpp::Node {
     std::shared_ptr<RangeSensorInterface> range_front_right;
     // std::shared_ptr<Imu> imu;
 
-    std::shared_ptr<Motors> motors;
+    std::shared_ptr<RclcppMotors> motors;
     rclcpp::TimerBase::SharedPtr timer_;
 
     PidController align_controller_;

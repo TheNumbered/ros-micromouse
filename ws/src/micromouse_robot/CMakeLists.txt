@@ -10,7 +10,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
-# find_package(tf2 REQUIRED)
+find_package(tf2 REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -26,9 +26,9 @@ endif()
 
 add_executable(micromouse_robot
   src/rclcpp_range_sensor.cpp
+  src/rclcpp_motors.cpp
   # src/imu.cpp
   src/micromouse_robot.cpp
-  src/motors.cpp
   src/pid_controller.cpp
   src/robot.cpp
   )
@@ -40,7 +40,7 @@ target_include_directories(
 )
 
 
-ament_target_dependencies(micromouse_robot rclcpp sensor_msgs nav_msgs)
+ament_target_dependencies(micromouse_robot rclcpp sensor_msgs nav_msgs tf2)
 
 install(TARGETS
   micromouse_robot

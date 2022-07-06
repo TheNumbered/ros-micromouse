@@ -10,7 +10,7 @@ Robot::Robot()
 
     // imu = std::make_shared<Imu>();
 
-    motors = std::make_shared<Motors>();
+    motors = std::make_shared<RclcppMotors>();
 
     using namespace std::chrono_literals;
     timer_ = create_wall_timer(100ms, std::bind(&Robot::update_, this));
@@ -19,18 +19,17 @@ Robot::Robot()
 void Robot::update_() {
     // RCLCPP_INFO(get_logger(), "left: %f", range_left->get_range());
     // RCLCPP_INFO(get_logger(), "front: %f", range_front->get_range());
-    // RCLCPP_INFO(get_logger(), "imu: %f", imu->get_angle());
 
-    if (range_front_left->get_range() > 0.16) {
+
+    if ((range_front_left->get_range() + range_front_right->get_range()) / 2 > 0.16) {
         auto cmd_arg_vel = align_controller_.get_command(0.0, range_left->get_range() - range_right->get_range(), get_clock()->now().seconds());
-        motors->set_vel(0.4, cmd_arg_vel);
-    } else if (range_front_left->get_range() > 0.06) {
+        motors->set_velocity(0.7, cmd_arg_vel);
+    } else if ((range_front_left->get_range() + range_front_right->get_range()) / 2 > 0.06) {
         auto cmd_arg_vel = align_controller_.get_command(0.0, range_front_left->get_range() - range_front_right->get_range(), get_clock()->now().seconds());
-        motors->set_vel(0.1, cmd_arg_vel);
-    }
-    else{
-        // auto cmd_arg_vel = align_controller_.get_command(1.57, imu->get_angle(), get_clock()->now().seconds());
-        motors->set_vel(0.0, 0.0);
+        motors->set_velocity(0.3, cmd_arg_vel);
+    } else {
+        auto cmd_arg_vel = align_controller_.get_command(3.14, motors->get_angle(), get_clock()->now().seconds());
+        motors->set_velocity(0.0, cmd_arg_vel);
     }
 }
 }  // namespace micromouse
