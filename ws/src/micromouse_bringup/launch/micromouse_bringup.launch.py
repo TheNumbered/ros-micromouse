@@ -56,7 +56,7 @@ def generate_launch_description():
                                              description='Absolute path to robot urdf file'),
 
         launch.actions.ExecuteProcess(
-            cmd=['gazebo',  world_path, '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so'], output='screen'),
+            cmd=['gazebo', '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so', world_pathx], output='screen'),
 
         joint_state_publisher_node,
         robot_state_publisher_node,

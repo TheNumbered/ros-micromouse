@@ -12,6 +12,9 @@ Use docker copose to bring  micromouse robot:
 # Enable using display inside container
 xhost local:+docker0
 
-# Run application
+# Spawn robot
 docker-compose up micromouse_bringup
+
+# Run random controller
+docker-compose up micromouse_controller
 ```
