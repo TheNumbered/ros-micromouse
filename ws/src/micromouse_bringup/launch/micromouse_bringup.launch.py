@@ -8,11 +8,6 @@ from launch.substitutions import Command, LaunchConfiguration
 import launch_ros
 import os
 from ament_index_python.packages import get_package_share_directory
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.conditions import IfCondition
-import os
-from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
@@ -63,16 +58,9 @@ def generate_launch_description():
         output='screen'
     )
 
-    gazebo_models_path = os.path.join(pkg_share, 'worlds')
-    os.environ["GAZEBO_MODEL_PATH"] = gazebo_models_path
-
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='model', default_value=default_model_path,
                                              description='Absolute path to robot urdf file'),
-        launch.actions.DeclareLaunchArgument(
-            name='world',
-            default_value = world_path,
-            description='Full path to the world model file to load'),
 
         launch.actions.ExecuteProcess(
             cmd=['gazebo', '--verbose',  world_path, '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so'], output='screen'),

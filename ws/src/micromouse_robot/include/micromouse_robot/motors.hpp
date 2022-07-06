@@ -1,5 +1,6 @@
 #pragma once
 #include <geometry_msgs/msg/twist.hpp>
+#include <sensor_msgs/msg/imu.hpp>
 #include <limits>
 #include <nav_msgs/msg/odometry.hpp>
 #include <rclcpp/rclcpp.hpp>
@@ -14,7 +15,6 @@ class Motors : public rclcpp::Node {
 
    private:
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
-    // rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_sub_;
 
     double vel_lin_;
     double vel_ang_;
