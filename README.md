@@ -10,11 +10,11 @@ make build
 Use docker copose to bring  micromouse robot:
 ``` bash
 # Enable using display inside container
-xhost local:+docker0
+xhost local:+root
 
 # Spawn robot
-docker-compose up micromouse_bringup
+docker compose up micromouse_bringup
 
 # Run random controller
-docker-compose up micromouse_controller
+docker compose up micromouse_controller
 ```

@@ -2,31 +2,15 @@ version: '1.0'
 
 services:
     micromouse_bringup:
-        image: deli/micromouse
-        privileged: true
-        network_mode: host
-        ipc: host
+        build: .
         environment:
-            - "DISPLAY"
-            - "QT_X11_NO_MITSHM=1"
-        command: bash -c "cd /root/ws && colcon build --executor parallel && source /root/ws/install/setup.bash && ros2 launch micromouse_bringup micromouse_bringup.launch.py"
+            - DISPLAY
+            - QT_X11_NO_MITSHM = 1
+        command: ros2 launch micromouse_bringup micromouse_bringup.launch.py
         volumes:
-            - /tmp/.X11-unix:/tmp/.X11-unix
+            - /tmp/.X11-unix:/tmp/.X11-unix:rw
             - /dev/dri:/dev/dri
-            - ./ws:/root/ws
 
     micromouse_controller:
-        image: deli/micromouse
-        privileged: true
-        ipc: host
-        network_mode: host
-        environment:
-            - "DISPLAY"
-            - "QT_X11_NO_MITSHM=1"
-        command: bash -c "cd /root/ws && colcon build --executor parallel && source /root/ws/install/setup.bash && ros2 launch micromouse_robot micromouse_robot.launch.py"
-        volumes:
-            - /tmp/.X11-unix:/tmp/.X11-unix
-            - /dev/dri:/dev/dri
-            - ./ws:/root/ws
-
-
+        build: .
+        command: ros2 launch micromouse_robot micromouse_robot.launch.py

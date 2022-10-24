@@ -14,18 +14,18 @@
                 <visual name="visual">
                     <geometry>
                         <mesh>
-                            <scale>0.001 0.001 0.001</scale>
-                            <uri>model://maze.stl</uri>
-                        </mesh>
+                <uri>model://maze.stl</uri>
+                <scale>0.001 0.001 0.001</scale>
+            </mesh>
                     </geometry>
                 </visual>
 
                 <collision name="collision">
                     <geometry>
-                        <mesh>
-                            <scale>0.001 0.001 0.001</scale>
-                            <uri>model://maze.stl</uri>
-                        </mesh>
+                       <mesh>
+                <uri>model://maze.stl</uri>
+                <scale>0.001 0.001 0.001</scale>
+            </mesh>
                     </geometry>
                 </collision>
             </link>
