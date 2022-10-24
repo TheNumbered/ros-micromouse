@@ -1,13 +1,8 @@
 #pragma once
-#include <limits>
+#include "math_structs.hpp"
 #include <string>
 
 namespace micromouse {
-struct Position2D {
-    float x_m;
-    float y_m;
-};
-
 class MotorsInterface {
    public:
     MotorsInterface()
@@ -18,6 +13,7 @@ class MotorsInterface {
     virtual float get_linear_velocity() = 0;
     virtual float get_angular_velocity() = 0;
     virtual float get_angle() = 0;
+    virtual Quaternion get_quaternion() = 0;
     virtual Position2D get_position() = 0;
 
    protected:
@@ -25,5 +21,6 @@ class MotorsInterface {
     float angular_velocity_rad_per_s_;
     float angle_rad_;
     Position2D position_;
+    Quaternion quaternion_;
 };
 }  // namespace micromouse

@@ -6,7 +6,6 @@ Robot::Robot(std::function<float()> get_time_stamp)
     : get_time_stamp_{get_time_stamp}
     , align_controller_(1.3, 0.3, 0.0)
     , rotate_controller_(0.9, 0.8, 0.000000000000001)
-    , robot_direction_{directions::NORTH}
     , command_linear_velocity_{0.0}
     , command_angular_velocity_{0.0}
     , command_angle_{0.0}

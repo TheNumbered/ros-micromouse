@@ -2,7 +2,7 @@
 using std::placeholders::_1;
 namespace micromouse {
 RclcppImu::RclcppImu()
-    : ImuInterface(), rclcpp::Node("imu_listener"){
+    : ImuInterface(), rclcpp::Node("imu_listener") {
     imu_sub_ = create_subscription<sensor_msgs::msg::Imu>("imu", 10, std::bind(&RclcppImu::imu_callback_, this, _1));
 }
 
@@ -28,6 +28,25 @@ float RclcppImu::get_angle() {
     }
     wait_set.remove_subscription(imu_sub_);
     return angle_rad_;
+}
+
+Quaternion RclcppImu::get_quaternion() {
+    rclcpp::WaitSet wait_set;
+    wait_set.add_subscription(imu_sub_);
+    auto ret = wait_set.wait(std::chrono::microseconds(100));
+    if (ret.kind() == rclcpp::WaitResultKind::Ready) {
+        sensor_msgs::msg::Imu msg;
+        rclcpp::MessageInfo info;
+        auto ret_take = imu_sub_->take(msg, info);
+        if (ret_take) {
+            quaternion_ = Quaternion{static_cast<float>(msg.orientation.x),
+                           static_cast<float>(msg.orientation.y),
+                           static_cast<float>(msg.orientation.z),
+                           static_cast<float>(msg.orientation.w)};
+        }
+    }
+    wait_set.remove_subscription(imu_sub_);
+    return quaternion_;
 }
 
 void RclcppImu::imu_callback_(const sensor_msgs::msg::Imu &msg) {

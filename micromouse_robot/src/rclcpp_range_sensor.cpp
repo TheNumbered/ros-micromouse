@@ -7,7 +7,7 @@ RclcppRangeSensor::RclcppRangeSensor(const std::string name)
     range_sub_ = this->create_subscription<sensor_msgs::msg::Range>(name + "/out", 10, std::bind(&RclcppRangeSensor::sensor_callback_, this, _1));
 }
 
-double RclcppRangeSensor::get_range() {
+float RclcppRangeSensor::get_range() {
     rclcpp::WaitSet wait_set;
     wait_set.add_subscription(range_sub_);
     auto ret = wait_set.wait(std::chrono::microseconds(100));
@@ -17,7 +17,7 @@ double RclcppRangeSensor::get_range() {
         auto ret_take = range_sub_->take(msg, info);
         if (ret_take) {
             RCLCPP_DEBUG(this->get_logger(), "got message: %f", msg.range);
-            range_ = msg.range;
+            range_ = static_cast<float>(msg.range);
         }
     }
     wait_set.remove_subscription(range_sub_);

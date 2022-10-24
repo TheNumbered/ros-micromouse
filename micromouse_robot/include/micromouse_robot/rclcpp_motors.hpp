@@ -9,7 +9,7 @@
 #include <sensor_msgs/msg/imu.hpp>
 #include <string>
 #include <thread>
-
+#include "math_structs.hpp"
 #include "motors_interface.hpp"
 
 namespace micromouse {
@@ -21,6 +21,7 @@ class RclcppMotors : public MotorsInterface, public rclcpp::Node {
     virtual float get_angular_velocity() override final;
     virtual float get_angle() override final;
     virtual Position2D get_position() override final;
+    virtual Quaternion get_quaternion() override final;
 
    private:
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;

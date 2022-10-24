@@ -1,16 +1,15 @@
 #pragma once
 #include <string>
-#include <limits>
-
+#include "math_structs.hpp"
 namespace micromouse {
 class RangeSensorInterface {
    public:
     RangeSensorInterface(const std::string &name)
-        : name_{name}, range_{std::numeric_limits<double>::quiet_NaN()} {}
-    virtual double get_range() = 0;
+        : name_{name}, range_{nan} {}
+    virtual float get_range() = 0;
 
    protected:
     const std::string name_;
-    double range_;
+    float range_;
 };
 }  // namespace micromouse

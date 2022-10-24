@@ -7,7 +7,6 @@
 #include "rclcpp_imu.hpp"
 #include "rclcpp_motors.hpp"
 #include "rclcpp_range_sensor.hpp"
-#include "maze.hpp"
 
 namespace micromouse {
 constexpr float FLOAT_MINIMAL_ERROR = 0.008;
@@ -25,7 +24,6 @@ class Robot {
     std::function<float()> get_time_stamp_;
     PidController align_controller_;
     PidController rotate_controller_;
-    float robot_direction_;
 
     float command_linear_velocity_;
     float command_angular_velocity_;

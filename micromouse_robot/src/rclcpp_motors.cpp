@@ -15,7 +15,7 @@ void RclcppMotors::set_velocity(float linear_velocity_m_per_s, float angular_vel
     cmd_vel_pub_->publish(message);
 }
 
-float RclcppMotors::get_linear_velocity(){
+float RclcppMotors::get_linear_velocity() {
     rclcpp::WaitSet wait_set;
     wait_set.add_subscription(odom_sub_);
     auto ret = wait_set.wait(std::chrono::microseconds(100));
@@ -69,6 +69,25 @@ float RclcppMotors::get_angle() {
     }
     wait_set.remove_subscription(odom_sub_);
     return angle_rad_;
+}
+
+Quaternion RclcppMotors::get_quaternion() {
+    rclcpp::WaitSet wait_set;
+    wait_set.add_subscription(odom_sub_);
+    auto ret = wait_set.wait(std::chrono::microseconds(100));
+    if (ret.kind() == rclcpp::WaitResultKind::Ready) {
+        nav_msgs::msg::Odometry msg;
+        rclcpp::MessageInfo info;
+        auto ret_take = odom_sub_->take(msg, info);
+        if (ret_take) {
+            quaternion_ = Quaternion{static_cast<float>(msg.pose.pose.orientation.x),
+                           static_cast<float>(msg.pose.pose.orientation.y),
+                           static_cast<float>(msg.pose.pose.orientation.z),
+                           static_cast<float>(msg.pose.pose.orientation.w)};
+        }
+    }
+    wait_set.remove_subscription(odom_sub_);
+    return quaternion_;
 }
 
 Position2D RclcppMotors::get_position() {

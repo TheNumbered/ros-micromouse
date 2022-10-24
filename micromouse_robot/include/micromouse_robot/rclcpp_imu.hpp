@@ -14,6 +14,7 @@ class RclcppImu : public ImuInterface, public rclcpp::Node {
    public:
     RclcppImu();
     virtual float get_angle() override final;
+    virtual Quaternion get_quaternion() override final;
 
    private:
     rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr imu_sub_;
